@@ -1,5 +1,5 @@
 package UNO;
 
 public enum Color {
-    GROC, VERMELL, BLAU, VERD
+    Groc, Vermell, Blau, Verd
 }

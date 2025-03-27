@@ -1,19 +1,25 @@
 package UNO;
 
-import java.util.Random;
-
 public class Carta {
     private int numero;
-    public Color color;
+    private Color color;
 
-    public Carta(int i, Color color) {
-        Random random = new Random();
-        this.numero = random.nextInt(10);
-        this.color = Color.values()[random.nextInt(Color.values().length - 1)];
+    public Carta(int numero, Color color) {
+        this.numero = numero;
+        this.color = color;
     }
 
-    public void mostrarCarta() {
-        System.out.println("Carta: " + color + " " + numero);
+    public int getNumero() {
+        return numero;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    @Override
+    public String toString() {
+        return "Carta{" + "valor=" + numero + ", color=" + color + '}';
     }
 }
 

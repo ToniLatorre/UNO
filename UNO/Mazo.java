@@ -33,10 +33,4 @@ public class Mazo {
             return null;
         }
     }
-
-    public void mostrarMazo() {
-        for (Carta carta : cartas) {
-            carta.mostrarCarta();
-        }
-    }
 }

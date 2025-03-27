@@ -2,6 +2,8 @@ package UNO;
 
 import java.util.ArrayList;
 
+import static UNO.Color.*;
+
 public class UI {
     // ANSI escape codes
     public static final String RESET = "\u001B[0m";
@@ -13,16 +15,16 @@ public class UI {
     private static String pintarCarta(Carta carta) {
         String color = "";
         switch (carta.getColor()) {
-            case Color.Groc:
+            case Groc:
                 color = YELLOW;
                 break;
-            case Color.Vermell:
+            case Vermell:
                 color = RED;
                 break;
-            case Color.Blau:
+            case Blau:
                 color = BLUE;
                 break;
-            case Color.Verd:
+            case Verd:
                 color = GREEN;
                 break;
             default:
