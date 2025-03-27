@@ -4,20 +4,12 @@ import java.util.Random;
 
 public class Carta {
     private int numero;
-    private Color color;
+    public Color color;
 
-    public Carta() {
+    public Carta(int i, Color color) {
         Random random = new Random();
-        this.numero = random.nextInt(10); // Números del 0 al 9
-        this.color = Color.values()[random.nextInt(Color.values().length - 1)]; // Sin contar NEGRO
-    }
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public Color getColor() {
-        return color;
+        this.numero = random.nextInt(10);
+        this.color = Color.values()[random.nextInt(Color.values().length - 1)];
     }
 
     public void mostrarCarta() {

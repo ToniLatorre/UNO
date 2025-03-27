@@ -1,10 +1,9 @@
 package UNO;
 public class Main {
     public static void main(String[] args) {
-        for (int i = 0; i < 5; i++) {
-            Carta carta = new Carta();
-            carta.mostrarCarta();
-        }
+        Mazo mazo = new Mazo();
 
+        System.out.println("barrejar mazo:");
+        mazo.mostrarMazo();
     }
 }
