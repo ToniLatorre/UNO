@@ -1,8 +1,7 @@
 package UNO;
 
-import java.util.ArrayList;
+import java.util.*;
 
-import static UNO.Color.*;
 
 public class UI {
     // ANSI escape codes

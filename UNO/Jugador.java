@@ -1,7 +1,6 @@
 package UNO;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Jugador {
     private String nom;
@@ -20,7 +19,7 @@ public class Jugador {
         cartes.add(carta);
     }
 
-    public void removeCarta(Carta carta) {
+    public void tirarCarta(Carta carta) {
         cartes.remove(carta);
     }
 

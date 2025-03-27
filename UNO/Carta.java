@@ -21,5 +21,9 @@ public class Carta {
     public String toString() {
         return "Carta{" + "valor=" + numero + ", color=" + color + '}';
     }
+
+    public void mostrarCarta() {
+        System.out.println("Carta: " + color + " " + numero);
+    }
 }
 

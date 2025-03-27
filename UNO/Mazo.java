@@ -1,36 +1,40 @@
 package UNO;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Mazo {
-    private List<Carta> cartas;
+    private Stack<Carta> cartes;
 
     public Mazo() {
-        cartas = new ArrayList<>();
-        getCarta();
+        cartes = new Stack<>();
+        inicialitzarMazo();
         barrejar();
     }
 
-    public void getCarta() {
+    private void inicialitzarMazo() {
         for (Color color : Color.values()) {
-                for (int i = 0; i <= 9; i++) {
-                    cartas.add(new Carta(i, color));
-                }
+            for (int i = 0; i <= 9; i++) {
+                cartes.push(new Carta(i, color));
             }
         }
+    }
 
-    public void barrejar() {
-        Collections.shuffle(cartas);
+    public Stack<Carta> getCartes() {
+        return cartes;
     }
 
     public Carta agafarCarta() {
-        if (!cartas.isEmpty()) {
-            return cartas.remove(0);
-        } else {
-            System.out.println("El mazo esta buit");
-            return null;
+        return cartes.pop();
+    }
+
+    public void reiniciar(Pilo pilo) {
+        while (!pilo.getCartes().isEmpty()) {
+            cartes.push(pilo.agafarCarta());
         }
+        barrejar();
+    }
+
+    public void barrejar() {
+        Collections.shuffle(cartes);
     }
 }
