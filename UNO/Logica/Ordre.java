@@ -21,4 +21,14 @@ public class Ordre {
     public void barrejarOrdre() {
         Collections.shuffle(jugadors);
     }
+
+    public int getNumJugadors() {
+        return jugadors.size();
+    }
+
+    public void setIndexActual(int index) {
+        if (index >= 0 && index < jugadors.size()) {
+            indexActual = index;
+        }
+    }
 }

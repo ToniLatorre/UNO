@@ -41,4 +41,8 @@ public class Jugador {
     public ArrayList<Carta> getCartes() {
         return new ArrayList<>(cartes);
     }
+
+    public void addCarta(Carta carta) {
+        cartes.add(carta);
+    }
 }
