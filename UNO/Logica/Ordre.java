@@ -22,13 +22,4 @@ public class Ordre {
         Collections.shuffle(jugadors);
     }
 
-    public int getNumJugadors() {
-        return jugadors.size();
-    }
-
-    public void setIndexActual(int index) {
-        if (index >= 0 && index < jugadors.size()) {
-            indexActual = index;
-        }
-    }
 }

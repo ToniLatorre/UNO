@@ -140,16 +140,4 @@ public class Partida {
             System.out.println("Entrada no valida");
         }
     }
-
-    public Mazo getMazo() {
-        return mazo;
-    }
-
-    public Pilo getPilo() {
-        return pilo;
-    }
-
-    public Ordre getOrdre() {
-        return ordre;
-    }
 }
