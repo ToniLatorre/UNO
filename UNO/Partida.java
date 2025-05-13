@@ -33,6 +33,11 @@ public class Partida {
         repartirCartes();
 
         Carta primeraCartaPilo = mazo.agafarCarta();
+        while (primeraCartaPilo.getTipus() != TipusCarta.NORMAL) {
+            mazo.getCartes().add(0, primeraCartaPilo);
+            mazo.barrejar();
+            primeraCartaPilo = mazo.agafarCarta();
+        }
         pilo.addCarta(primeraCartaPilo);
     }
 
@@ -73,7 +78,9 @@ public class Partida {
 
         while (!jocAcabat) {
             Jugador jugadorActiu = ordre.getJugadorActiu();
+            System.out.println("\n==================================");
             System.out.println("Torn de: " + jugadorActiu.getNom());
+            System.out.println("Sentit del joc: " + (ordre.getSentitHorari() ? "Horari" : "Antihorari"));
 
             Carta cartaAmunt = pilo.consultarCarta();
             System.out.println("Carta en joc:");
@@ -93,18 +100,38 @@ public class Partida {
                 }
 
                 jugadorActiu.robarCarta(mazo);
+                System.out.println("Has robat una carta");
 
                 System.out.println("Les teves cartes despres de robar:");
                 UI.mostrarCartes(jugadorActiu.getCartes());
 
+                Carta cartaRobada = jugadorActiu.getCartes().get(jugadorActiu.getCartes().size() - 1);
+                if (Carta.Regles.sonCartesCompatibles(cartaRobada, cartaAmunt)) {
+                    System.out.println("Pots tirar la carta que has robat. Vols tirar-la? (s/n)");
+                    Scanner scanner = new Scanner(System.in);
+                    String opcio = scanner.nextLine().toLowerCase();
+                    if (opcio.equals("s")) {
+                        jugadorActiu.tirarCarta(cartaRobada, pilo);
+                        System.out.println("Has tirat:");
+                        UI.mostrarCarta(cartaRobada);
+
+                        if (cartaRobada.getTipus() != TipusCarta.NORMAL) {
+                            cartaRobada.aplicarEfecte(this);
+                        }
+                    }
+                }
             }
 
             if (jugadorActiu.nombreDeCartes() == 0) {
-                System.out.println(jugadorActiu.getNom() + " ha guanyat");
+                System.out.println(jugadorActiu.getNom() + " ha guanyat!");
                 jocAcabat = true;
+            } else if (jugadorActiu.nombreDeCartes() == 1) {
+                System.out.println(jugadorActiu.getNom() + " diu: UNO!");
             }
 
-            ordre.passarTorn();
+            if (!jocAcabat) {
+                ordre.passarTorn();
+            }
         }
     }
 
@@ -114,7 +141,7 @@ public class Partida {
         ArrayList<Carta> cartesCompatibles = new ArrayList<>();
 
         for (Carta c : jugador.getCartes()) {
-            if (Regles.sonCartesCompatibles(c, cartaAmunt)) {
+            if (Carta.Regles.sonCartesCompatibles(c, cartaAmunt)) {
                 cartesCompatibles.add(c);
             }
         }
@@ -124,7 +151,7 @@ public class Partida {
             System.out.println(i + ": " + cartesCompatibles.get(i));
         }
 
-        System.out.println("escolleix una carta (0-" + (cartesCompatibles.size()-1) + "):");
+        System.out.println("Escolleix una carta (0-" + (cartesCompatibles.size()-1) + "):");
         int opcio = -1;
         try {
             opcio = scanner.nextInt();
@@ -133,11 +160,27 @@ public class Partida {
                 jugador.tirarCarta(cartaElegida, pilo);
                 System.out.println("Has tirat:");
                 UI.mostrarCarta(cartaElegida);
+
+                if (cartaElegida.getTipus() != TipusCarta.NORMAL) {
+                    cartaElegida.aplicarEfecte(this);
+                }
             } else {
                 System.out.println("Opció no valida");
             }
         } catch (Exception e) {
             System.out.println("Entrada no valida");
         }
+    }
+
+    public Mazo getMazo() {
+        return mazo;
+    }
+
+    public Pilo getPilo() {
+        return pilo;
+    }
+
+    public Ordre getOrdre() {
+        return ordre;
     }
 }

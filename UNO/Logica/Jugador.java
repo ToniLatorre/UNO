@@ -23,7 +23,7 @@ public class Jugador {
 
     public boolean potTirarCarta(Carta cartaAmunt) {
         for (Carta carta : cartes) {
-            if (Regles.sonCartesCompatibles(carta, cartaAmunt)) {
+            if (Carta.Regles.sonCartesCompatibles(carta, cartaAmunt)) {
                 return true;
             }
         }

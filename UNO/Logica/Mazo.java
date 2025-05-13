@@ -13,9 +13,27 @@ public class Mazo {
 
     private void inicialitzarMazo() {
         for (Color color : Color.values()) {
-            for (int i = 0; i <= 9; i++) {
+            cartes.push(new Carta(0, color));
+
+            for (int i = 1; i <= 9; i++) {
+                cartes.push(new Carta(i, color));
                 cartes.push(new Carta(i, color));
             }
+
+            for (int i = 0; i < 2; i++) {
+                cartes.push(new Carta(-1, color, TipusCarta.Prohibit));
+                cartes.push(new Carta(-1, color, TipusCarta.CanviSentit));
+                cartes.push(new Carta(-1, color, TipusCarta.Mes2));
+            }
+        }
+
+        for (int i = 0; i < 4; i++) {
+            cartes.push(new Carta(-1, null, TipusCarta.CanviColor));
+        }
+
+
+        for (int i = 0; i < 4; i++) {
+            cartes.push(new Carta(-1, null, TipusCarta.Mes4));
         }
     }
 
@@ -28,9 +46,15 @@ public class Mazo {
     }
 
     public void reiniciar(Pilo pilo) {
+        Carta cartaSuperior = pilo.consultarCarta();
+        pilo.agafarCarta();
+
         while (!pilo.getCartes().isEmpty()) {
             cartes.push(pilo.agafarCarta());
         }
+
+        pilo.addCarta(cartaSuperior);
+
         barrejar();
     }
 
